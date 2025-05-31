@@ -40,6 +40,8 @@ if page == "Play":
     
     Draw any digit (0-9) in the canvas on the left, and the model will predict which digit it is. 
     The bar chart on the right shows the model's confidence for each possible digit.
+             
+    Tips: Try and fill the canvas all the way. If the drawing is too small, the model will not be able to predict it correctly.    
     """)
     # Add label input
     #label = st.number_input("Enter the digit label (0-9):", min_value=0, max_value=9, value=0, step=1)
@@ -81,28 +83,27 @@ if page == "Play":
     if st.button("Predict"):
         if canvas_result.image_data is not None:
             # Convert canvas to image
-            img = Image.fromarray(canvas_result.image_data)
-        
-            # Resize to 28x28
+            img = Image.fromarray(canvas_result.image_data).convert("L")
             img_small = img.resize((28, 28))
-            # Show resized image
-            st.image(img_small, caption="Resized to 28x28", width=100)
+            img_array = (np.array(img_small) > 128).astype(int)
+        
+            # Reshape to match your model's input format
+            x = img_array.reshape(-1, 1)  # (784, 1)
         
             # Save to fine-tuning directory
             #save_path = save_to_fine_tuning(img_small, label)
             #st.write(f"Saved to fine-tuning directory: {save_path}")
         
-        # Save temporarily for prediction
-        img_small.save("temp_drawing.png")
-        
+        # Get probabilities and update bar chart
+        probs = predict_single_image(x, None, return_probs=True)
         # Make prediction
-        predicted_label = predict_single_image("temp_drawing.png", None)
+        predicted_label = int(np.argmax(probs))
         
         # Display prediction
         st.write(f"Predicted Digit: {predicted_label}")
         
-        # Get probabilities and update bar chart
-        probs = predict_single_image("temp_drawing.png", None, return_probs=True)
+       
+        
         df = pd.DataFrame({'Probability': probs}, index=range(10))
         # **replace** the chart
         chart_placeholder.bar_chart(df)
