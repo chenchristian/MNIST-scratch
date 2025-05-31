@@ -3,18 +3,20 @@ import pandas as pd
 
 
 #only 1 hidden layer.
-def initializeParams (input_size = 784,  hidden_size = 128, output = 10):
-    #weights from input to hidden layer
-    W1 = np.random.randn(input_size, hidden_size)
+def initializeParams (input_size = 784, hidden_size = 128, output = 10):
+    # Use He initialization for better gradient flow
+    W1 = np.random.randn(input_size, hidden_size) * 0.01
 
     #bias from input to hidden layer
-    B1 = np.random.randn(hidden_size, 1)
+    #starting with 0
+    B1 = np.zeros((hidden_size, 1)) *0.01
     
     #weights from hidden to output
-    W2 = np.random.randn(hidden_size, output)
+    W2 = np.random.randn(hidden_size, output) * 0.01
 
     #bais from hidden to output
-    B2 = np.random.randn(output, 1)
+    #starting with 0
+    B2 = np.zeros((output,1 )) *0.01
 
     return W1, B1, W2, B2
 
@@ -29,14 +31,14 @@ def softMax(Z):
     return expZ / np.sum(expZ, axis=0, keepdims=True)
 
 def forwardProp(x, W1, B1, W2, B2):
-    Z =  W1.T @ x + B1
-    hidden_layer = ReLu(Z)
+    Z1 =  W1.T @ x + B1
+    hidden_layer = ReLu(Z1)
     
     Z2 = W2.T @ hidden_layer + B2
 
-    print(Z2)
+    #print(Z2)
 
     output = softMax(Z2)
 
-    return(output)
+    return Z1, hidden_layer, Z2, output
     
