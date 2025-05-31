@@ -40,22 +40,3 @@ def forwardProp(x, W1, B1, W2, B2):
 
     return(output)
     
-
-x = pd.read_csv("/Users/christianchen/VSCode_Python/Stat21/mnist_training.csv", header = None)
-
-
-
-#gets the first row, and everything but first column
-row = 1
-image = x.iloc[row, 1:].values.reshape(-1, 1)
-answer = x.iloc[row,1]
-
-
-W1, B1, W2, B2 = initializeParams()
-
-output = forwardProp(image, W1, B1, W2, B2)
-
-
-rounded_output = np.round(output, 5)
-
-print(rounded_output)
