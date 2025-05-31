@@ -40,10 +40,3 @@ def predict_single_image(x, label, return_probs=False):
     if return_probs:
         return A2.ravel()
     return predicted_label
-
-if __name__ == "__main__":
-    # Replace these paths with your image and label paths
-    image_path = "/Users/christianchen/VSCode_Python/Stat21/mnist_png/my_test/temp_drawing.png"
-    label = 1
-    
-    predict_single_image(image_path, label)
