@@ -12,20 +12,20 @@ from single_test import predict_single_image
 from streamlit_option_menu import option_menu
 from pathlib import Path
 
-FINE_TUNING_DIR = "/Users/christianchen/VSCode_Python/Stat21/mnist_png/fine_tuning"
+#
 
-def save_to_fine_tuning(img, label):
+#def save_to_fine_tuning(img, label):
     # Create directory if it doesn't exist
-    label_dir = os.path.join(FINE_TUNING_DIR, str(label))
-    os.makedirs(label_dir, exist_ok=True)
+    #label_dir = os.path.join(FINE_TUNING_DIR, str(label))
+    #os.makedirs(label_dir, exist_ok=True)
     
     # Generate random number between 1 and 5000
-    random_num = random.randint(1, 5000)
-    save_path = os.path.join(label_dir, f"{random_num}.png")
+    #random_num = random.randint(1, 5000)
+    #save_path = os.path.join(label_dir, f"{random_num}.png")
     
     # Save the image
-    img.save(save_path)
-    return save_path
+    #img.save(save_path)
+    #return save_path
 
 def _clear_canvas():
         st.session_state.canvas_key += 1
