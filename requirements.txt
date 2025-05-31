@@ -1,0 +1,6 @@
+streamlit
+streamlit-drawable-canvas
+streamlit-option-menu
+numpy
+pandas
+Pillow
