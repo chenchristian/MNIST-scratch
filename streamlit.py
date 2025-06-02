@@ -43,6 +43,10 @@ if page == "Play":
              
     Tips: Try and fill the canvas all the way. If the drawing is too small, the model will not be able to predict it correctly.    
     """)
+
+    if st.button("How it works"):
+        page = "How it works"
+
     # Add label input
     #label = st.number_input("Enter the digit label (0-9):", min_value=0, max_value=9, value=0, step=1)
 
