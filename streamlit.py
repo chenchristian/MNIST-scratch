@@ -119,11 +119,6 @@ if page == "Play":
     st.button("Clear", on_click=_clear_canvas)
       
 
-
-
-if page == "How it works":
-    st.title("How it works")
-
     st.markdown(
         """
         You can find all of the source files for this project on GitHub:
